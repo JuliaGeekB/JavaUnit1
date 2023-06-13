@@ -4,7 +4,13 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) throws Exception {
         //task1();
-        task2();
+        //task2();
+        //task3();
+        // task4
+        String[] lines ={"дом", "домовой", "домашний"};
+        int prefixLen=findPfx(lines);
+        System.out.println(prefixLen);
+        System.out.println(lines[0].substring(0,findPfx(lines)));
     }
     private static void task1() {
         Scanner iScanner=new Scanner(System.in);
@@ -43,5 +49,46 @@ public class App {
         System.out.println(cnt);
         System.out.println(max_cnt);
     }
-
+    private static void task3() {
+        // Дан массив двоичных чисел и число 3, Если в массиве есть число 3, то переносим в конец.
+        int[]mass={1,1,0,3,1,3,0,1,0,3};
+        int [] newMass=new int [mass.length];
+        int count=0;
+        int index=0;
+        for(int i=0; i<mass.length; i++) {
+            if(mass[i] !=3){
+                newMass[index++]=mass[i];
+            }else{
+                count++;
+            }
+            }
+        for(int i=mass.length-count; i<mass.length; i++) {
+            newMass[i]=3;
+        }
+        for (int item: newMass)
+            System.out.printf("%d\t", item);
+    }
+    private static int findPfx (String[] lines) {
+        // Метод, который находит самую длинную строку общего префикса среди массива строк. 
+        // Если общего префикса нет - вернуть пустую строку.
+        int res=0;
+        boolean pfxExis=true;
+        while(pfxExis){
+            res++;
+            for (int i = 0; i < lines.length-1; i++) {
+                if(res<=lines[i].length()&&res<=lines[i+1].length()){
+                    if(lines[i].substring(0,res).compareTo(lines[i+1].substring(0,res)) !=0){
+                        res--;
+                        pfxExis=false;
+                        break;
+                    }
+                }else{
+                    res--;
+                    pfxExis=false;
+                    break;
+                }
+            }
+        }
+        return res;
+    }
 }
