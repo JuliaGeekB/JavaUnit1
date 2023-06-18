@@ -11,6 +11,12 @@ public class App {
         int prefixLen=findPfx(lines);
         System.out.println(prefixLen);
         System.out.println(lines[0].substring(0,findPfx(lines)));
+        // task5. Во фразе переставить слова в обратном порядке
+        task5();
+        
+        // Task8. Задан массив, например, nums = [1,7,3,6,5,6]. Написать программу, которая 
+        // найдет индекс i для этого массива такой, что сумма элементов с индексами < i равна сумме элементов с индексами > i
+        //task8();
     }
     private static void task1() {
         Scanner iScanner=new Scanner(System.in);
@@ -90,5 +96,56 @@ public class App {
             }
         }
         return res;
+
+    }
+    private static void task8() {
+        int[] num = {1,7,3,6,5,6};
+        System.out.println(meanIndex(num));
+    }
+
+    private static int meanIndex(int[] num) {
+        int index = 1;
+        while(lowSum(num,index)<higSum(num, index))
+        {
+            index++;
+        }
+        if(lowSum(num,index)==higSum(num, index))
+        {
+            return index;
+        }
+        else{
+        return -1;
+        }
+    }
+
+    private static int higSum(int[] num, int index) {
+        int sum = 0;
+        for(int i=num.length-1;i>index;i--)
+        {
+            sum+=num[i];
+        }
+        return sum;
+    }
+
+
+    private static int lowSum(int[] num, int index) {
+        int sum = 0;
+        for(int i=0;i<index;i++)
+        {
+            sum+=num[i];
+        }
+        return sum;
+    }
+
+    private static void task5() {
+        String sourceLn = "Welcome To Java Cource";
+        String[] splitLn = sourceLn.split(" ");
+        String outLn = "";
+        for(int i = splitLn.length-1; i>=0; i--)
+        {
+            outLn = outLn+splitLn[i]+" ";
+        }
+        System.out.println(sourceLn);
+        System.out.println(outLn);
     }
 }
